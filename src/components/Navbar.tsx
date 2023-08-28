@@ -15,6 +15,10 @@ export function Navbar() {
                     <li>
                         <Link to="/expenses">Expenses</Link>
                     </li>
+
+                    <li>
+                        <Link to="/transaction/new">New Transaction</Link>
+                    </li>
                 </ul>
             </nav>
         </>

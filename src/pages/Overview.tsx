@@ -41,7 +41,7 @@ export function Overview() {
             <h3>Transactions</h3>
 
             {store.transactions.map((i) => {
-                return <div key={i.id}>{i.itemName}</div>;
+                return <div key={i.id}>{JSON.stringify(i)}</div>;
             })}
         </>
     );
