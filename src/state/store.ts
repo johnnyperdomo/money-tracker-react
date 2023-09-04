@@ -85,7 +85,6 @@ const useTransactionStore = create<TransactionStore>()((set) => ({
     addTransaction(transaction: Transaction) {
         //add - hook
         console.log("add transaction in store", transaction);
-        // addTransaction(state.transactions, transaction)
         set((state) => ({
             ...state,
             transactions: addTransaction(state.transactions, transaction),

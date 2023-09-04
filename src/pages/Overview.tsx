@@ -1,8 +1,15 @@
+import { Button, Link } from "@mui/material";
 import transactionStore from "../state/store";
 import { Transaction } from "../types/Transaction";
+import { useNavigate } from "react-router-dom";
 
 export function Overview() {
     const store = transactionStore();
+    const navigate = useNavigate();
+
+    function navigateToRoute(route: string) {
+        navigate(route);
+    }
 
     function addTransaction() {
         const newTransaction: Transaction = {
@@ -41,7 +48,13 @@ export function Overview() {
             <h3>Transactions</h3>
 
             {store.transactions.map((i) => {
-                return <div key={i.id}>{JSON.stringify(i)}</div>;
+                return (
+                    <div key={i.id}>
+                        <Button onClick={() => navigateToRoute(`/transaction/view/${i.id}`)}>
+                            {JSON.stringify(i)}
+                        </Button>
+                    </div>
+                );
             })}
         </>
     );
