@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { Transaction } from "../types/Transaction";
-import useTransactionStore from "../state/store";
+import { useBoundStore } from "../state/store";
 
 export function useTransactionFinder() {
     const [transaction, setTransaction] = useState<Transaction>();
-    const store = useTransactionStore();
+    const store = useBoundStore();
 
     function findTransaction(id: string) {
         const transactions = store.transactions;

@@ -1,9 +1,9 @@
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import useTransactionStore from "../state/store";
 import { Transaction } from "../types/Transaction";
 import { TransactionType } from "../types/TransactionType";
+import { useBoundStore } from "../state/store";
 
 type Inputs = {
     itemName: string;
@@ -12,7 +12,7 @@ type Inputs = {
 
 export function TransactionEdit() {
     const [transactionType, setTransactionType] = useState<TransactionType>("expense");
-    const store = useTransactionStore();
+    const store = useBoundStore();
 
     const {
         register,

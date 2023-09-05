@@ -1,11 +1,15 @@
-import { Button, Link } from "@mui/material";
-import transactionStore from "../state/store";
+import { Button } from "@mui/material";
 import { Transaction } from "../types/Transaction";
 import { useNavigate } from "react-router-dom";
+import { useBoundStore } from "../state/store";
+import { useGetClients } from "../hooks/useGetClients";
 
 export function Overview() {
-    const store = transactionStore();
+    const store = useBoundStore();
     const navigate = useNavigate();
+    const { data, isLoading } = useGetClients();
+
+    console.log(data, isLoading);
 
     function navigateToRoute(route: string) {
         navigate(route);

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { TransactionType } from "../types/TransactionType";
 import { Transaction } from "../types/Transaction";
-import useTransactionStore from "../state/store";
+import { useBoundStore } from "../state/store";
 
 export function useFilter(type: TransactionType) {
     const [transactions, setTransactions] = useState<Transaction[]>([]);
-    const store = useTransactionStore();
+    const store = useBoundStore();
 
     useEffect(() => {
         const transactions = store.transactions;
