@@ -1,37 +1,6 @@
 import { StateCreator } from "zustand";
 import { Transaction } from "../types/Transaction";
 
-const addTransaction = (transactions: Transaction[], transaction: Transaction): Transaction[] => [
-    ...transactions,
-    transaction,
-];
-
-const removeTransaction = (transactions: Transaction[], id: string): Transaction[] =>
-    transactions.filter((trans) => trans.id !== id);
-
-function updateTransaction(transactions: Transaction[], id: string, transaction: Transaction) {
-    // const findIndex = transactions.findIndex((obj) => obj.id === id);
-
-    const newArr = transactions.map((obj) => {
-        if (obj.id === id) {
-            return {
-                ...obj,
-                itemName: transaction.itemName,
-                price: transaction.price,
-                type: transaction.type,
-            };
-        }
-
-        return obj;
-    });
-
-    console.log(newArr);
-
-    return newArr;
-}
-
-////////
-
 export type TransactionSlice = {
     transactions: Transaction[];
     //
@@ -102,3 +71,36 @@ const createTransactionSlice: StateCreator<TransactionSlice> = (set) => ({
 });
 
 export default createTransactionSlice;
+
+////////////////
+
+const addTransaction = (transactions: Transaction[], transaction: Transaction): Transaction[] => [
+    ...transactions,
+    transaction,
+];
+
+const removeTransaction = (transactions: Transaction[], id: string): Transaction[] =>
+    transactions.filter((trans) => trans.id !== id);
+
+function updateTransaction(transactions: Transaction[], id: string, transaction: Transaction) {
+    // const findIndex = transactions.findIndex((obj) => obj.id === id);
+
+    const newArr = transactions.map((obj) => {
+        if (obj.id === id) {
+            return {
+                ...obj,
+                itemName: transaction.itemName,
+                price: transaction.price,
+                type: transaction.type,
+            };
+        }
+
+        return obj;
+    });
+
+    console.log(newArr);
+
+    return newArr;
+}
+
+////////

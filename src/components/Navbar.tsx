@@ -10,6 +10,7 @@ const pages = [
     { name: "Overview", route: "/" },
     { name: "Payments", route: "/payments" },
     { name: "Expenses", route: "/expenses" },
+    { name: "Clients", route: "/clients" },
     { name: "New Transaction", route: "/transaction/new" },
 ];
 

@@ -5,6 +5,7 @@ import { Payments } from "./pages/Payments";
 import { Transaction } from "./pages/Transaction";
 import { NavLayout } from "./components/NavLayout";
 import { TransactionEdit } from "./pages/Transaction-Edit";
+import { Clients } from "./pages/Clients";
 
 export const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
             {
                 path: "/payments",
                 element: <Payments />,
+            },
+            {
+                path: "/clients",
+                element: <Clients />,
             },
             { path: "/transaction/view/:transactionId", element: <Transaction /> },
             { path: "/transaction/new", element: <TransactionEdit /> },
