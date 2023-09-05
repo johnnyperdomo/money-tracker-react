@@ -1,4 +1,6 @@
+import { Box, Container, Typography } from "@mui/material";
 import { useFilter } from "../hooks/usefilterHook";
+import { TransactionTable } from "../components/TransactionTable";
 
 export function Expenses() {
     const transactions = useFilter("expense"); //custom hooks
@@ -6,10 +8,16 @@ export function Expenses() {
     console.log(transactions);
 
     return (
-        <>
-            {transactions.map((i) => {
-                return <div key={i.id}>{JSON.stringify(i)}</div>;
-            })}
-        </>
+        <Container maxWidth="md">
+            <Box sx={{ my: 3 }}>
+                <Typography variant="h3">Expenses</Typography>
+            </Box>
+
+            {transactions.length === 0 ? (
+                <Typography> No Expenses Yet. Create a new one to get started. </Typography>
+            ) : (
+                <TransactionTable transactions={transactions}></TransactionTable>
+            )}
+        </Container>
     );
 }

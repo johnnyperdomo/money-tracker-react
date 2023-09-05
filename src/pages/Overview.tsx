@@ -1,7 +1,8 @@
-import { Button } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { Transaction } from "../types/Transaction";
 import { useNavigate } from "react-router-dom";
 import { useBoundStore } from "../state/store";
+import { TransactionTable } from "../components/TransactionTable";
 
 export function Overview() {
     const store = useBoundStore();
@@ -38,24 +39,25 @@ export function Overview() {
     }
 
     return (
-        <>
-            <h1>Overview</h1>
-
+        <Container maxWidth="md">
+            <Typography variant="h4" sx={{ my: 2 }}>
+                Overview
+            </Typography>
+            {/* Have cards here */}
             <button onClick={() => store.removeTransaction("123")}>remove</button>
             <button onClick={() => updateTransaction()}>update</button>
             <button onClick={() => addTransaction()}>add transaction</button>
 
-            <h3>Transactions</h3>
-
-            {store.transactions.map((i) => {
-                return (
-                    <div key={i.id}>
-                        <Button onClick={() => navigateToRoute(`/transaction/view/${i.id}`)}>
-                            {JSON.stringify(i)}
-                        </Button>
-                    </div>
-                );
-            })}
-        </>
+            <Box sx={{ mt: 3 }}>
+                <Typography variant="h5" sx={{ mb: 2 }}>
+                    Transactions
+                </Typography>
+                {store.transactions.length === 0 ? (
+                    <Typography> No Transactions Yet. Create a new one to get started. </Typography>
+                ) : (
+                    <TransactionTable transactions={store.transactions}></TransactionTable>
+                )}
+            </Box>
+        </Container>
     );
 }
