@@ -12,6 +12,7 @@ import {
 import { Transaction } from "../types/Transaction";
 import { useNavigate } from "react-router-dom";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useBoundStore } from "../state/store";
 
 type TableType = {
     transactions: Transaction[];
@@ -19,6 +20,7 @@ type TableType = {
 
 export function TransactionTable({ transactions }: TableType) {
     const navigate = useNavigate();
+    const store = useBoundStore();
 
     function navigateToRoute(route: string) {
         navigate(route);
@@ -26,6 +28,7 @@ export function TransactionTable({ transactions }: TableType) {
 
     function removeTransaction(id: string) {
         console.log("transaction removed: ", id);
+        store.removeTransaction(id);
     }
 
     return (

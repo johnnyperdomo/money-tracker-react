@@ -1,34 +1,10 @@
-import { Box, Container, Typography } from "@mui/material";
-import { Transaction } from "../types/Transaction";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { useBoundStore } from "../state/store";
 import { TransactionTable } from "../components/TransactionTable";
+import { OverviewCard } from "../components/OverviewCard";
 
 export function Overview() {
     const store = useBoundStore();
-
-    function addTransaction() {
-        const newTransaction: Transaction = {
-            itemName: "pogostick ",
-            id: crypto.randomUUID(),
-            date: Date.now().toString(),
-            price: 14,
-            type: "expense",
-        };
-
-        store.addTransaction(newTransaction);
-        console.log(store.transactions);
-    }
-
-    function updateTransaction() {
-        //TODO: get already properties that are there
-        const newTransaction: Transaction = {
-            itemName: "service repair",
-            id: crypto.randomUUID(), //TODO: get already id
-            date: Date.now().toString(),
-            price: 1443,
-            type: "payment",
-        };
-    }
 
     return (
         <Container maxWidth="md">
@@ -36,11 +12,22 @@ export function Overview() {
                 <Typography variant="h3">Overview</Typography>
             </Box>
 
-            <Box>{/* Have cards here */}</Box>
-
-            <button onClick={() => store.removeTransaction("123")}>remove</button>
-            <button onClick={() => updateTransaction()}>update</button>
-            <button onClick={() => addTransaction()}>add transaction</button>
+            <Box sx={{ my: 2 }}>
+                <Grid container spacing={2}>
+                    <Grid item xs={6} sm={3}>
+                        <OverviewCard text="All Transactions" category="all" />
+                    </Grid>
+                    <Grid item xs={6} sm={3}>
+                        <OverviewCard text="Payments" category="payments" />
+                    </Grid>
+                    <Grid item xs={6} sm={3}>
+                        <OverviewCard text="Expenses" category="expenses" />
+                    </Grid>
+                    <Grid item xs={6} sm={3}>
+                        <OverviewCard text="Clients" category="clients" />
+                    </Grid>
+                </Grid>
+            </Box>
 
             <Box sx={{ mt: 3 }}>
                 <Typography variant="h5" sx={{ mb: 2 }}>

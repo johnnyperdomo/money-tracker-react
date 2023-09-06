@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useTransactionFinder } from "../hooks/useTransactionFinder";
 import { useParams } from "react-router-dom";
-import { Card, CardActions, CardContent, Chip, Container, Typography } from "@mui/material";
+import { Card, CardContent, Chip, Container, Typography } from "@mui/material";
 
 export function Transaction() {
     const [transaction, setTransaction] = useTransactionFinder(); //custom hooks
