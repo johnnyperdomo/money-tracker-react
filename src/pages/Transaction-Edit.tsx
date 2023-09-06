@@ -29,11 +29,7 @@ export function TransactionEdit() {
         navigate(route);
     }
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<Inputs>();
+    const { register, handleSubmit } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         const newTransaction: Transaction = {
@@ -51,6 +47,7 @@ export function TransactionEdit() {
 
     const handleToggleChange = (event: React.MouseEvent<HTMLElement>, newType: TransactionType) => {
         setTransactionType(newType);
+        console.log(event);
     };
 
     return (
