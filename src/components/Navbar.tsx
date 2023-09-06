@@ -11,7 +11,6 @@ const pages = [
     { name: "Payments", route: "/payments" },
     { name: "Expenses", route: "/expenses" },
     { name: "Clients", route: "/clients" },
-    { name: "New Transaction", route: "/transaction/new" },
 ];
 
 export function Navbar() {
@@ -38,6 +37,19 @@ export function Navbar() {
                                 {page.name}
                             </Button>
                         ))}
+                    </Box>
+                    <Box>
+                        <Button
+                            onClick={() => navigateToRoute("/transaction/new")}
+                            sx={{
+                                my: 2,
+                                color: "white",
+                                backgroundColor: "black",
+                                display: "flex",
+                                px: 2,
+                            }}>
+                            Add Transaction
+                        </Button>
                     </Box>
                 </Toolbar>
             </Container>

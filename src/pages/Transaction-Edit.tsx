@@ -1,9 +1,20 @@
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import {
+    Box,
+    Button,
+    Container,
+    FormControl,
+    InputLabel,
+    OutlinedInput,
+    ToggleButton,
+    ToggleButtonGroup,
+    Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Transaction } from "../types/Transaction";
 import { TransactionType } from "../types/TransactionType";
 import { useBoundStore } from "../state/store";
+import { useNavigate } from "react-router-dom";
 
 type Inputs = {
     itemName: string;
@@ -13,6 +24,11 @@ type Inputs = {
 export function TransactionEdit() {
     const [transactionType, setTransactionType] = useState<TransactionType>("expense");
     const store = useBoundStore();
+    const navigate = useNavigate();
+
+    function navigateToRoute(route: string) {
+        navigate(route);
+    }
 
     const {
         register,
@@ -31,9 +47,7 @@ export function TransactionEdit() {
 
         store.addTransaction(newTransaction);
 
-        console.log(store.transactions);
-
-        //TODO: route to newID
+        navigateToRoute(`/transaction/view/${newTransaction.id}`);
     };
 
     const handleToggleChange = (event: React.MouseEvent<HTMLElement>, newType: TransactionType) => {
@@ -41,37 +55,55 @@ export function TransactionEdit() {
     };
 
     return (
-        <>
-            <h1>Overview</h1>
+        <Container maxWidth="md">
+            <Box sx={{ my: 3 }}>
+                <Typography variant="h3">Add Transaction</Typography>
+            </Box>
+            <Box sx={{ my: 3 }}>
+                <Typography sx={{ mb: 1 }}>Choose Transaction Type</Typography>
 
-            <h3>Select Transaction Type</h3>
-            <ToggleButtonGroup
-                color="primary"
-                value={transactionType}
-                exclusive
-                onChange={handleToggleChange}
-                aria-label="Platform">
-                <ToggleButton value="expense">Expense</ToggleButton>
-                <ToggleButton value="payment">Payment</ToggleButton>
-            </ToggleButtonGroup>
-
+                <ToggleButtonGroup
+                    color="primary"
+                    value={transactionType}
+                    exclusive
+                    onChange={handleToggleChange}
+                    aria-label="Platform">
+                    <ToggleButton value="expense">Expense</ToggleButton>
+                    <ToggleButton value="payment">Payment</ToggleButton>
+                </ToggleButtonGroup>
+            </Box>
             <br />
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input
+                <InputLabel>Enter Transaction Name</InputLabel>
+
+                <OutlinedInput
                     {...register("itemName", { required: true })}
                     type="text"
-                    placeholder="Gas"
+                    placeholder="Car Cas"
+                    size="small"
                 />
+                <br />
 
-                <input
+                <InputLabel sx={{ mt: 3 }}>Enter Price</InputLabel>
+
+                <OutlinedInput
                     {...register("price", {
                         required: true,
                     })}
                     type="number"
-                    placeholder="123"
+                    placeholder="45"
+                    size="small"
                 />
-                <input type="submit" />
+
+                <br />
+
+                <Button
+                    type="submit"
+                    size="large"
+                    sx={{ mt: 3, color: "white", backgroundColor: "dodgerblue" }}>
+                    Add Transaction
+                </Button>
             </form>
-        </>
+        </Container>
     );
 }

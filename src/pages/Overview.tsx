@@ -1,16 +1,10 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { Transaction } from "../types/Transaction";
-import { useNavigate } from "react-router-dom";
 import { useBoundStore } from "../state/store";
 import { TransactionTable } from "../components/TransactionTable";
 
 export function Overview() {
     const store = useBoundStore();
-    const navigate = useNavigate();
-
-    function navigateToRoute(route: string) {
-        navigate(route);
-    }
 
     function addTransaction() {
         const newTransaction: Transaction = {
@@ -34,16 +28,16 @@ export function Overview() {
             price: 1443,
             type: "payment",
         };
-
-        store.updateTransaction("3", newTransaction);
     }
 
     return (
         <Container maxWidth="md">
-            <Typography variant="h4" sx={{ my: 2 }}>
-                Overview
-            </Typography>
-            {/* Have cards here */}
+            <Box sx={{ my: 3 }}>
+                <Typography variant="h3">Overview</Typography>
+            </Box>
+
+            <Box>{/* Have cards here */}</Box>
+
             <button onClick={() => store.removeTransaction("123")}>remove</button>
             <button onClick={() => updateTransaction()}>update</button>
             <button onClick={() => addTransaction()}>add transaction</button>

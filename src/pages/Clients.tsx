@@ -1,5 +1,7 @@
+import { Box, Button, Container, Typography } from "@mui/material";
 import useGetClients from "../hooks/useGetClients";
 import { useBoundStore } from "../state/store";
+import { ClientTable } from "../components/ClientTable";
 
 export function Clients() {
     //button => load clients
@@ -20,12 +22,27 @@ export function Clients() {
     }
 
     return (
-        <>
-            <button onClick={() => loadClients()}>Load Clients</button>
+        <Container maxWidth="md">
+            <Box sx={{ my: 3 }}>
+                <Typography variant="h3">Clients</Typography>
+            </Box>
 
-            {store.clients.length === 0
-                ? "no clients yet, tap to import"
-                : JSON.stringify(store.clients)}
-        </>
+            <Box sx={{ mt: 3 }}>
+                {store.clients.length === 0 ? (
+                    <Box>
+                        <Typography> No Clients Yet. Import from backup. </Typography>
+
+                        <Button
+                            onClick={() => loadClients()}
+                            sx={{ my: 2, backgroundColor: "dodgerblue", color: "white" }}
+                            size="large">
+                            Import Clients
+                        </Button>
+                    </Box>
+                ) : (
+                    <ClientTable clients={store.clients}></ClientTable>
+                )}
+            </Box>
+        </Container>
     );
 }
